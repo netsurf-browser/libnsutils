@@ -47,10 +47,15 @@ int main(int argc, char**argv)
                 }
         }
 
-        if (scanf("%1024mc%n", &buffer, (int *)&buffer_len) < 1) {
+        buffer = calloc(1, 2048);
+        if (buffer == NULL) {
                 return 1;
         }
 
+        if (scanf("%1024c%n", buffer, (int *)&buffer_len) != 1) {
+                free(buffer);
+                return 1;
+        }
 
         if (decode) {
                 /* decode */
